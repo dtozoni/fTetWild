@@ -1758,6 +1758,10 @@ void floatTetWild::filter_outside_floodfill(Mesh& mesh, bool invert_faces) {
     auto &tets = mesh.tets;
     auto &tet_vertices = mesh.tet_vertices;
 
+    Eigen::Matrix<Scalar, Eigen::Dynamic, 3> V;
+    Eigen::Matrix<int, Eigen::Dynamic, 3> F;
+    get_tracked_surface(mesh, V, F);
+    
     std::queue<int> t_queue;
     for (int i = 0; i < tets.size(); i++) {
         if (tets[i].is_removed)
